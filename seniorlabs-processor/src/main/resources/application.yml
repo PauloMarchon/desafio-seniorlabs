@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: seniorlabs-processor
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+            value:
+              default:
+                type: 'com.paulomarchon.seniorlabs_processor.PunchClockDto'
+      auto-offset-reset: earliest
+
+client:
+  legacy-system:
+    url: 'https://api.mockytonk.com/proxy/ab2198a3-cafd-49d5-8ace-baac64e72222'
+
+logging:
+  level:
+    root: info
